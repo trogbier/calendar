@@ -27,7 +27,6 @@ const Navbar: FC = () => {
                         {user.user}
                     </Typography>
                     {isAuth &&
-                    // @ts-ignore
                     <Button color="inherit" onClick={setLogout}>Exit</Button>}
                 </Toolbar>
             </AppBar>

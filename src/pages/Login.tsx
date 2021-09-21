@@ -11,18 +11,20 @@ import {useAppDispatch, useAppSelector} from "../hooks/useTypedSelector";
 const Login: FC = () => {
     const {error, isLoading} = useAppSelector(state => state.auth)
 
-    const {setLogin} = useAppDispatch()
+    const {setLogin, setError} = useAppDispatch()
 
     const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         const formData = new FormData(event.currentTarget);
         const data = {
-            user: formData.get('user'),
-            password: formData.get('password'),
+            user: `${formData.get('user')}`,
+            password: `${formData.get('password')}`,
         };
-        // что то с типами
-        // @ts-ignore
-        setLogin(data)
+        if (data.user && data.password) {
+            setLogin(data)
+        } else {
+            setError('Пустые значения')
+        }
     };
 
     return (

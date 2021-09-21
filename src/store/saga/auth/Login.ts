@@ -15,7 +15,7 @@ const request = async (payload: IUser) => {
             localStorage.setItem('auth', 'true')
             localStorage.setItem('user', payload.user)
         } else {
-           return new Error()
+            throw new Error()
         }
     } catch (e) {
         throw new Error()
@@ -31,7 +31,6 @@ function* Login({payload}: setLogin) {
         yield put(AuthActionCreators.setLoading(false))
         yield put(AuthActionCreators.setError(''))
     } catch (e) {
-        console.log('e')
         yield put(AuthActionCreators.setError('Некоректные даные'))
     }
 }
