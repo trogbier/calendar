@@ -6,16 +6,25 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
+import {useAppDispatch} from "../hooks/useTypedSelector";
+import {AuthActionCreators} from "../store/reducers/auth/action-creators";
 
 const Login: FC = () => {
 
+    const dispatch = useAppDispatch()
+
     const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const formData = new FormData(event.currentTarget);
+        const data = {
+            user: formData.get('user'),
+            password: formData.get('password'),
+        };
+        // что то с типами
+        // @ts-ignore
+        dispatch(AuthActionCreators.setLogin(data))
+        // @ts-ignore
+        dispatch(AuthActionCreators.setLogout(data))
     };
 
     return (
@@ -37,10 +46,10 @@ const Login: FC = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="user"
+                        label="User name"
+                        name="user"
+                        autoComplete="user name"
                         autoFocus
                     />
                     <TextField

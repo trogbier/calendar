@@ -1,5 +1,5 @@
 export interface IUser {
-    email: string,
+    user: string,
     password: string
 }
 
@@ -17,22 +17,22 @@ export enum AuthActionEnum {
     SET_IS_LOADING = 'SET_IS_LOADING'
 }
 
-export interface SetAuthAction {
+interface SetAuthAction {
     type: AuthActionEnum.SET_AUTH,
     payload: boolean
 }
 
-export interface SetAuthErrorAction {
+interface SetAuthErrorAction {
     type: AuthActionEnum.SET_ERROR,
     payload: string
 }
 
-export interface SetAuthUserAction {
+interface SetAuthUserAction {
     type: AuthActionEnum.SET_USER,
     payload: IUser
 }
 
-export interface SetAuthLoadingAction {
+interface SetAuthLoadingAction {
     type: AuthActionEnum.SET_IS_LOADING,
     payload: boolean
 }

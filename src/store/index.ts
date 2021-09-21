@@ -1,12 +1,13 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
 import createSagaMiddleware from "redux-saga";
 import {rootReducer} from "./reducers";
+import rootSaga from "./saga";
 
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
 
-// sagaMiddleware.run(mySaga)
+sagaMiddleware.run(rootSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
