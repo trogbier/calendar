@@ -9,5 +9,5 @@ export const AuthActionCreators = {
     setAuth: (auth: boolean): AuthAction => ({type: AuthActionEnum.SET_AUTH, payload: auth}),
     //saga
     setLogin: (data: IUser): AuthActionSaga => ({type: AuthActionEnumSaga.SET_LOGIN, payload: data}),
-    setLogout: (data: IUser): AuthActionSaga => ({type: AuthActionEnumSaga.SET_LOGOUT, payload: data})
+    setLogout: (): AuthActionSaga => ({type: AuthActionEnumSaga.SET_LOGOUT})
 }

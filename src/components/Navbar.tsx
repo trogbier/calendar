@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
 import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import {useAppSelector} from "../hooks/useTypedSelector";
+import {useAppDispatch, useAppSelector} from "../hooks/useTypedSelector";
 
 const Navbar: FC = () => {
-    const {isAuth} = useAppSelector(state => state.auth)
+    const {isAuth, user} = useAppSelector(state => state.auth)
+    const {setLogout} = useAppDispatch()
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
@@ -18,10 +20,15 @@ const Navbar: FC = () => {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 11}}>
                         Calendar
                     </Typography>
-                    {isAuth && <Button color="inherit">Exit</Button>}
+                    <Typography component="div" sx={{flexGrow: 1}}>
+                        {user.user}
+                    </Typography>
+                    {isAuth &&
+                    // @ts-ignore
+                    <Button color="inherit" onClick={setLogout}>Exit</Button>}
                 </Toolbar>
             </AppBar>
         </Box>

@@ -5,15 +5,14 @@ export enum AuthActionEnumSaga {
     SET_LOGOUT = 'SET_LOGOUT'
 }
 
-interface setLogin {
+export interface setLogin {
     type: AuthActionEnumSaga.SET_LOGIN,
     payload: IUser
 
 }
 
-interface setLogout {
-    type: AuthActionEnumSaga.SET_LOGOUT,
-    payload: IUser
+export interface setLogout {
+    type: AuthActionEnumSaga.SET_LOGOUT
 }
 
 export type AuthActionSaga = setLogin | setLogout

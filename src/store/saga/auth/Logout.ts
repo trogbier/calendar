@@ -1,14 +1,14 @@
-import {AuthActionEnumSaga, AuthActionSaga} from "./types";
+import {AuthActionEnumSaga} from "./types";
 import {takeEvery, put} from "redux-saga/effects";
 import {AuthActionCreators} from "../../reducers/auth/action-creators";
+import {IUser} from "../../reducers/auth/types";
 
 
-function* Logout({payload}: AuthActionSaga) {
-    try {
-        // console.log('hi')
-    } catch (e) {
-        yield put(AuthActionCreators.setError('Ошибка'))
-    }
+function* Logout() {
+    localStorage.removeItem('auth')
+    localStorage.removeItem('user')
+    yield put(AuthActionCreators.setUser({} as IUser))
+    yield put(AuthActionCreators.setAuth(false))
 }
 
 export default function* watchLogout() {

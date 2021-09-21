@@ -6,12 +6,12 @@ import {
     TextField,
     Typography
 } from "@material-ui/core";
-import {useAppDispatch} from "../hooks/useTypedSelector";
-import {AuthActionCreators} from "../store/reducers/auth/action-creators";
+import {useAppDispatch, useAppSelector} from "../hooks/useTypedSelector";
 
 const Login: FC = () => {
+    const {error, isLoading} = useAppSelector(state => state.auth)
 
-    const dispatch = useAppDispatch()
+    const {setLogin} = useAppDispatch()
 
     const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -22,9 +22,7 @@ const Login: FC = () => {
         };
         // что то с типами
         // @ts-ignore
-        dispatch(AuthActionCreators.setLogin(data))
-        // @ts-ignore
-        dispatch(AuthActionCreators.setLogout(data))
+        setLogin(data)
     };
 
     return (
@@ -40,6 +38,9 @@ const Login: FC = () => {
             >
                 <Typography component="h1" variant="h5">
                     Sign in
+                </Typography>
+                <Typography component="h1" variant="h5" color={"red"}>
+                    {error}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                     <TextField
@@ -67,6 +68,7 @@ const Login: FC = () => {
                         fullWidth
                         variant="contained"
                         sx={{mt: 3, mb: 2}}
+                        disabled={isLoading}
                     >
                         Sign In
                     </Button>
